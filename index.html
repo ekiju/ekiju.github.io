@@ -104,10 +104,10 @@
                                                     <!-- start sub menu item -->
                                                     <ul>
                                                         <li class="dropdown-header">Contact</li>
-                                                        <li><a href="https://github.com/ekiju">GitHub</a></li>
-                                                        <li><a href="https://linkedin.com/in/kijulee">LinkedIn</a></li>
+                                                        <li><a href="https://github.com/ekiju" target="_blank">GitHub</a></li>
+                                                        <li><a href="https://linkedin.com/in/kijulee" target="_blank">LinkedIn</a></li>
                                                         <li><a href="#contact">Contact Me</a></li>
-                                                        <li><a href="https://drive.google.com/file/d/1_IQoeen_tmqrf1jEPdVLFg8n4JOOS9YU/view?usp=sharing">Resume</a></li>
+                                                        <li><a href="https://drive.google.com/file/d/1_IQoeen_tmqrf1jEPdVLFg8n4JOOS9YU/view?usp=sharing" target="_blank">Resume</a></li>
                                                     </ul>
                                                     <!-- end sub menu item -->
                                                 </li>
@@ -268,7 +268,7 @@
                                                 <div class="portfolio-hover-box vertical-align-middle">
                                                     <div class="portfolio-hover-content position-relative">
                                                         <a href="http://18.222.69.239/"><span class="line-height-normal font-weight-600 text-small alt-font margin-5px-bottom text-extra-dark-gray text-uppercase display-block">WhereTo</span></a>
-                                                        <p class="text-medium-gray text-extra-small text-uppercase">Built on Ruby on Rails | April 2018 - present</p>
+                                                        <p class="text-medium-gray text-extra-small text-uppercase">Built on Ruby on Rails | March 2018 - present</p>
                                                         <p class="text-medium-gray text-extra-small text-uppercase">Next Steps: Add functionality so users can add friends and limit viewing events to within their circle</p>
                                                     </div>
                                                 </div>
@@ -401,7 +401,7 @@
                             <div class="padding-eleven-all text-center xs-no-padding-lr">
                                 <div class="text-medium-gray alt-font text-small text-uppercase margin-5px-bottom xs-margin-three-bottom">Fill out the form and we'll be in touch soon!</div>
                                 <h5 class="margin-55px-bottom text-white alt-font font-weight-700 text-uppercase xs-margin-ten-bottom">Contact me</h5>
-                                <form id="project-contact-form" action="javascript:void(0)" method="post">
+                                <form id="project-contact-form" action="https://formspree.io/leekijuu@gmail.com" method="post">
                                     <div class="row">
                                          <div class="col-md-12">
                                             <div id="success-project-contact-form" class="no-margin-lr"></div>
@@ -413,7 +413,7 @@
                                             <input type="text" name="phone" id="phone" placeholder="Phone" class="bg-transparent border-color-medium-dark-gray medium-input">
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="text" name="email" id="email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input">
+                                            <input type="text" name="_replyto" id="email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input">
                                         </div>
 
                                         <div class="col-md-12">
@@ -475,6 +475,29 @@
         <!-- start scroll to top -->
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
         <!-- end scroll to top -->
+        <script>
+        var $contactForm = $('#project-contact-form');
+        $contactForm.submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '//formspree.io/leekijuu@gmail.com',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'json',
+                beforeSend: function() {
+                    $contactForm.append('<div class="alert alert--loading">Sending message…</div>');
+                },
+                success: function(data) {
+                    $contactForm.find('.alert--loading').hide();
+                    $contactForm.append('<div class="alert alert--success">Message sent!</div>');
+                },
+                error: function(err) {
+                    $contactForm.find('.alert--loading').hide();
+                    $contactForm.append('<div class="alert alert--error">Ops, there was an error.</div>');
+                }
+            });
+        });
+        </script>
         <!-- javascript libraries -->
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/modernizr.js"></script>
